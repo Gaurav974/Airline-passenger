@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-6 offset-md-3 mb-3 ">
+        <div class="card mb-3 cardheder" *ngFor="let item of getpasengerarr" id="{{item.id}}" #cardinfo>
+            <div class="card-body ">
+                <div class="form-group ">
+                    <i class="fa-solid fa-circle cardinfo" style="color: #bd0000;" [ngClass]="{'text-success':item.checkedIn}"></i>
+                    <input type="text" [value]="item.fullname" class="form-control" #inputcontrol>
+                </div>
+                <p *ngIf="item.checkInDate ;else hidepara">Chek in Date:{{item.checkInDate | date}}</p>
+                <ng-template #hidepara>
+                    <p>Chek in Date: Not chekd in</p>
+                </ng-template>
+                <p *ngIf="item.children ;else hidechildren">children :{{item.children.length}}</p>
+                <ng-template #hidechildren>
+                    <p>
+                        children : 0
+                    </p>
+                </ng-template>
+                <div>
+                    <button class="btn btn-primary text-white" (click)="OnEdithandler(removednone,addnone)"
+                        #addnone>edit</button>
+                    <button class="btn btn-primary text-white d-none"
+                        (click)="OnUpdate(removednone,addnone,item.id,inputcontrol)" #removednone>done</button>
+                    <button class="btn btn-primary text-white ml-2"
+                        (click)="OndeleteHandler(cardinfo,item.fullname)">remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
